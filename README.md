@@ -16,3 +16,6 @@ _Note: Files in this repository should be considered skeletal versions that are 
 
   decryptMsg_Bash.sh
   > A skeleton of commands that filters out mismatching parts of an input text to retrieve the codex for a message.
+
+<h1>Tutorials</h1>
+Please refer to the readme in the tutorial
