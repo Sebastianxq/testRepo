@@ -1,0 +1,28 @@
+OWASP and CWE
+
+OWASP Top 10
+	1.) Injections
+		Includes anything where code is injected into a process for malicious intent. Normally something like an SQL injection. It tricks the interpreter to execute commands that the user entered without proper authorization
+
+	2.)Broken authentications
+		Authentication which isn't implemented correctly, leading to attackers being able to compromise passwords, keys or explait the flaw to authenticate themselves as someone else for any amount of time (temporarily or permanantly)
+
+	3.)Sensitive Data Exposure
+		Data like credit card info that is not properly encrypted either at rest or in travel, allowing attackers to grab the data and do something bad with it
+
+	4.) XML Eternal entities (XXE) *new one*
+		A old/poorly configured xml processor evaluates external entity references within XML Docs, allowing an attacker to expose internal files and ports, execute code remotely or perform a DDOS attack.
+
+	5.) Broken Access Control *recently merged*
+		Improper restriction of authenticated users, potentially leading to a data leak for other users and sensitive info, and modification of other accounts
+
+	6.) Security Misconfiguration
+		Most commonly seen issue. Can be anything from open cloud storage, misconfigured http headers, or even verbose error messages that contain sensitive info. Avoiced by correctly configuring a system and ensurign all patches and upgrades are done in a timely manner.
+
+	7.) XSS 
+		When an application includes untrusted data ina new web page without proper validation or escaping or when updates on an existing web page with user supplied data using a browser api that allows for creation of html or javascript. This allows attackers to execute scripts in a victims browser which can hijack the user session, deface a website or redirect the user to a malicious site
+
+	8.)Insecure Deserialization *new from community?*
+		Often leads to Remote code execution. can also lead to replay attacks, injection attacks, and privilege escalation attacks.
+	9.) Using components with Known Vulnerabilities (Like Jboss)
+	10.) Insifficient Logging & Monitoring *new*

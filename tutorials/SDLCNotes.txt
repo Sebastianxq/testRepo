@@ -1,0 +1,109 @@
+SDLC Notes
+
+Waterfall Model
+	Linear and sequential
+	Used in projects that 
+		Dont change requirements
+		Have very clear documented requirements
+	Advantages
+		Easy to explain
+		Structured
+		Verfication Done at early stages
+	Disadvantages
+		Requirements cant be changed
+		Difficult to revert to a stage after it's finished
+		Expensive to adjust scope 
+		Costly and needs more details
+	Use Cases
+		Documented and clear Requirements
+		Project is short
+
+V Shaped Model
+	Extension of waterfall
+	Used in projects that are 
+		clearly defined
+		with tech/tools that are well known
+	Advantages
+		Simple
+		Each phase has specific deliverables
+		Higher chance of success over waterfall due to more testing
+		V&V in early stages
+	Disadvantages
+		Inflexible like waterfall
+		Scope adjustment is difficult and expensive
+		Costly and needs more time 
+	Use Cases
+		Projects that need testing
+		small-mid sized projects
+		Requirements are strictly predefined
+
+
+Prototyping Model
+	Used to visualize components of the software to limit the gap of misunderstanding the customer requirements by the dev team
+	When the final prototype is made the requirementss are considered frozen
+	3 types fo prototyping
+		1.)Throwaway prototype: PRototypes are eventually discarded rather than becoming a part of the final software
+		2.) Evolutionary prototype: prototypes that evolve into the final system throuhg iterative user feedback.
+		3.)Incremental Prototyping: THe final product is built as sperate prototypes and then merged into 1.
+	Advantages
+		Reduced time and costs
+		Improved and increased user involvement
+	Disadvantage
+		Excessive devlopment time for prototypes
+		Costly to implement prototypes
+		Developer doesnt really knwo the user objectives
+
+Spiral Model
+	Good for large, expensive and complicated projects
+	Seperated by planning, risk assessment and the building of prototypes
+	Advantages
+		Estimates become more realistic
+		Early involvement of dev team
+		Manages risks and devlops the system in phases
+	Disadvantage
+		High cost and time to reach the final product
+		Highly customized limiting reusability
+	Use Case
+		Customer is unsure of requireemnts
+		Major edits are expected
+		Projects are mid-high risk
+		New product has flexbility to release in stages
+
+Iterative/Incremental Model
+	Starts with initial plannign and edns with deployment with the cycli iteraction in between.
+	Basic concept is to develop a system through repeated cycles and in smaller portions, allowing devs to take advantage of what was learned.
+	Consists of mini waterfall/v models
+	Advantage
+		Better use of scarce resources
+		can accomodate some change requests between the increments
+		More focused on customer value than linear approaches
+		Can detect project issues and fix later
+	Dsiadvantage
+		Needs heavy documentation
+		Follows a set of processes
+		Requires more customer involvment that linear approaches
+		Integrations between iterations can be an issue
+	Use Case
+		Reuiqremnts are strictly predefined
+		Large Scale project
+		Main task is rpedefined but details may change 
+
+Agile Model
+	Iterative and incremental development where requirements and solutions evolve through collaborating teams 
+	Advantages
+		Decreases the time required to get some system features
+		constant communication for ensuring work is correct
+		low cost high quality
+	Disadvantages
+		Scalability
+		Documentation is done at later stages
+		Reduces usability of components
+		Needs special skills per team
+	Use Cases
+		Users' needs change dynamically
+		Less price for changes 
+		ONly requires initial planning to start projects
+
+Scrum Model
+	A type of agile development
+	Designed for teams of 3-9 people who break the work into actions that can be completed within timed iterations around 2 weeks long.

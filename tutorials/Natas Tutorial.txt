@@ -1,0 +1,22 @@
+Natas Tutorial
+
+Level0 (Find password on page):
+
+To find the password on this page, you just need to inspect the page source. In the html, written in a comment, will be the password to the next level
+
+Password:gtVrDuiDfck831PqWsLEZy5gyDz1clto 
+
+Level1(Find password on page but right clicking is blocked!):
+
+1.) Use Developer Tools and then expand the html to find the password
+2.)Save the webpage and then open it in a text editor to view the source!
+
+Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
+
+
+Level 2 (Nothing on the page)
+
+For this one we will have to use our detective skills to find the password. Inspecting the page reveals a few scripts for jquery, css and some other noise. The interesting part here is the picture that is embedded into the website. This picture is a 1x1 pixel but holds the answer to the solution for this level. Copy the url to the picture but TAKE OUT the last part of the extension, leaving it only at http://natas2.natas.labs.overthewire.org/files/. From there you can see there is a text file on the index. Click it and there's the file for the next page!
+
+
+Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14

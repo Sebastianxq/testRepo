@@ -1,0 +1,240 @@
+Over The Wire Tutorials/?s
+
+1.)How does overthewire know which port the connection is coming from? Do computers store the specific port number when making a request? And if so, what is the purpose of spending that extra bit of information within a request.
+
+
+Over the wire tutorials
+Level 0 (connect to SSH): 
+	For level 0 you simply need to type in the command ssh bandit0@overthewire.org or whatever into a terminal that supports ssh. I ended up sing puTTY since the pawnshop i used to work at relied on that program for it's entire database but cygwin or something similar is fine.
+
+Level 0-1 (Open a simple 1 string filename):
+	Using the same host as the previous level (puTTy allows you to save the port and website for later terminals which is a bonus) first have 2 termianls/ windows ready. in the first one go back to bandit0 but this time use bash commands (ls) to find the readme file located within it. Once this file is found, perform further bash commands (cat) to get the contents and then use the contents of that read me file for the password for bandit1. 
+
+	Password: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
+
+Level 1-2 (Opens files that are only dashes):
+	Similar to the last one you must read from a file that is found within the dir. To read the dash file you can simply type "cat ./-" to read it, the password you should find:
+
+	Password: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
+
+	You can also use ls -a in theory to get the file in question
+
+Level 2-3 (Open a filename with spaces within it):
+	To open the file you just need to put the title in parenthesis, so execute the command "cat 'spaces in the filename'".
+
+	Password: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
+
+Level 3-4 (find hidden files within a directory):
+	To find the hidden file within the "inhere" directory, first switch to that directory with "cd inhere" and then proceed to type in "find". Once find is executed an updated listing should be available with the file "./.hidden" within it/ cat that file and the password will then be discovered
+
+	Password:pIwrPrtPN36QITSp3EQaw936yaFoFgAB
+
+Level 04-05 (find the password within a handful of passwords named -fileXX):
+	since cat -file00 is not possible, use find to then list the files within the format found above "./.file-name" and then execute it from there. I ended up going through each file individually but im sure there is a method out there that can be doen with one command, perhaps creating a shell command that iterates from 00 to 09? Anyways:
+
+	Password: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
+
+level 05-06 (Find a file of a specific size within about a dozen directories):
+	To find the file you can use the following command to specify where the file is:
+
+	 find inhere -type f -size 1033c -exec ls {} \
+
+	 The command above checks all the files within the inhere directory and checks to see if their size is 1033 bytes, it returns the location. From there you can use the following command to display the password required
+
+	 cat inhere/maybehere07/.file2
+
+	 Password:DXjZPULLxYr17uwoI01bNLQbtFemEgo7
+
+Level 06-07 (find a file that is owned by a specific user and owned by a specific group that is NOT in the starting dir):
+	To start off you can view file permissions using "ls -la" this will display the file in a -rwxrwxrwx format, the format is explained below
+
+	-/d: states if the slot is a file or a directory
+	1st rwx: permissions for the owner of the file
+	2nd rwx: permissions for the group owners of the file
+	3rd rwx: permissions for everyone else
+
+	When initially loggin into bandit 6, there is nothing in the directory so you need to move up 1 more directory. You can do this by typing in the following command
+
+	cd ..
+
+	In the next directory you can type in the command find -size33c -user bandit7 -group bandit6 but there is no file within the directory that matches the criteria (you will also recieve a few permisisons denied due to some directories being locked out from your user) type in the same command you used to move up 1 more directory and then type in the search command to once again search for a file that matches the given criteria. It is here you will find the file ./bandit7.password, with that file you can view the password by typing in the following
+
+	 cat "./bandit7.password"
+
+	 This will give the password found below
+
+	Password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
+
+Level 07-08(find a password next to a specific string in a text file):
+	
+	This one just requires that you understand how to use grep (a command that searches for a particular string) Simply type in the command below and the password will be displayed
+
+	grep "millionth" data.txt
+
+	Password: cvX2JJa4CFALtqS87jk27qwqGhBM9plV
+
+Level 08-09(Find the password on a line that only occurs once within the text file)
+	To find this password you need to use the following command
+
+	sort data.txt | uniq -u
+
+	Sort does exactly what it says and sorts the file in alphabetical order
+	uniq -u removes all instances of repetitions. 
+	The pipe is used to give uniq -u an input, since it relies on repetitions to be next to each other to remove them
+
+	Password: UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
+
+Level 09-10 (Find a password next to = signs where most of the text is not human readable): NEEDS IMPORVEMENT
+
+	To cheese this one you can easily type the following command and then look through the few lines to find it
+
+	sort data.txt
+
+	password: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
+
+Level 10-11 (Covert base64 to human readable):
+	To convert the encoding of a file specifically this one all you have to do is type in the following command
+
+	 base64 -d data.txt
+
+	 Password: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
+
+Level 11-12 (Rot13 encoding of a text file):
+	The only commands you need for this one are cat and tr. Cat so that you can pipe the file into stdout and tr which is used to fix the rotation. since both capitals and lowercase have been shifted you must that that into account when doing the command which is as follows
+
+	cat data.txt | tr '[a-zA-Z]' '[n-za-mN-ZA-M]'
+
+
+	Password:5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
+
+Level 12-13(Hex dump of a compressed file):
+	
+	This level asks that you revert some work done to obfuscate the password. since you need write permissions overTheWire allows you to create directories within the tmp directory. to create one and move the data file to saiddirectory, do the following commands
+		mkdir /tmp/NAME (to make dir)
+		cp data.txt /tmp/NAME
+
+	And then to move to the directory, in case you are still unsure how, do the following
+		cd .. (to move to home)
+		cd .. (to move to root)
+		cd tmp/NAME
+
+	from there use the following command to revert the data dump
+		xxd -r data.text
+
+	Here's the fun part, since the file was compressed multiple times (and it really was compressed multiple times) you must figure out what the current type of compression is and revert it. to do that do the following
+
+		file FILE_NAME
+
+	each time you compress do the same method and then after maybe 10 or so iterations you will get a ASCII text file containing the password to the next part. I should also note that since you are allowed to make files within this directory it is likely plausible that you can create a .sh file that automatically decompresses the files until you get to the uncompressed password version. I have yet to implement it but I believe that you can likely use file to figure out which extension it is and then based on the outcome decompress using a specific library.
+	
+
+	password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
+
+	It is also worth nothing that you can cheese this one by randomly entering someone elses tmp directory, although that would be immoral amirite?
+
+Level 13-14 (Using a private RSA key to login):
+	RSA is a type of encryption that which at is used for obviously security reasons. upon first glance the key supplied is long enough to be unbreakable by current means (meaning you can't brute force it or guess it in your lifetime). The first thing you should do is get the key, which is below
+
+	-----BEGIN RSA PRIVATE KEY-----
+	MIIEpAIBAAKCAQEAxkkOE83W2cOT7IWhFc9aPaaQmQDdgzuXCv+ppZHa++buSkN+
+	gg0tcr7Fw8NLGa5+Uzec2rEg0WmeevB13AIoYp0MZyETq46t+jk9puNwZwIt9XgB
+	ZufGtZEwWbFWw/vVLNwOXBe4UWStGRWzgPpEeSv5Tb1VjLZIBdGphTIK22Amz6Zb
+	ThMsiMnyJafEwJ/T8PQO3myS91vUHEuoOMAzoUID4kN0MEZ3+XahyK0HJVq68KsV
+	ObefXG1vvA3GAJ29kxJaqvRfgYnqZryWN7w3CHjNU4c/2Jkp+n8L0SnxaNA+WYA7
+	jiPyTF0is8uzMlYQ4l1Lzh/8/MpvhCQF8r22dwIDAQABAoIBAQC6dWBjhyEOzjeA
+	J3j/RWmap9M5zfJ/wb2bfidNpwbB8rsJ4sZIDZQ7XuIh4LfygoAQSS+bBw3RXvzE
+	pvJt3SmU8hIDuLsCjL1VnBY5pY7Bju8g8aR/3FyjyNAqx/TLfzlLYfOu7i9Jet67
+	xAh0tONG/u8FB5I3LAI2Vp6OviwvdWeC4nOxCthldpuPKNLA8rmMMVRTKQ+7T2VS
+	nXmwYckKUcUgzoVSpiNZaS0zUDypdpy2+tRH3MQa5kqN1YKjvF8RC47woOYCktsD
+	o3FFpGNFec9Taa3Msy+DfQQhHKZFKIL3bJDONtmrVvtYK40/yeU4aZ/HA2DQzwhe
+	ol1AfiEhAoGBAOnVjosBkm7sblK+n4IEwPxs8sOmhPnTDUy5WGrpSCrXOmsVIBUf
+	laL3ZGLx3xCIwtCnEucB9DvN2HZkupc/h6hTKUYLqXuyLD8njTrbRhLgbC9QrKrS
+	M1F2fSTxVqPtZDlDMwjNR04xHA/fKh8bXXyTMqOHNJTHHNhbh3McdURjAoGBANkU
+	1hqfnw7+aXncJ9bjysr1ZWbqOE5Nd8AFgfwaKuGTTVX2NsUQnCMWdOp+wFak40JH
+	PKWkJNdBG+ex0H9JNQsTK3X5PBMAS8AfX0GrKeuwKWA6erytVTqjOfLYcdp5+z9s
+	8DtVCxDuVsM+i4X8UqIGOlvGbtKEVokHPFXP1q/dAoGAcHg5YX7WEehCgCYTzpO+
+	xysX8ScM2qS6xuZ3MqUWAxUWkh7NGZvhe0sGy9iOdANzwKw7mUUFViaCMR/t54W1
+	GC83sOs3D7n5Mj8x3NdO8xFit7dT9a245TvaoYQ7KgmqpSg/ScKCw4c3eiLava+J
+	3btnJeSIU+8ZXq9XjPRpKwUCgYA7z6LiOQKxNeXH3qHXcnHok855maUj5fJNpPbY
+	iDkyZ8ySF8GlcFsky8Yw6fWCqfG3zDrohJ5l9JmEsBh7SadkwsZhvecQcS9t4vby
+	9/8X4jS0P8ibfcKS4nBP+dT81kkkg5Z5MohXBORA7VWx+ACohcDEkprsQ+w32xeD
+	qT1EvQKBgQDKm8ws2ByvSUVs9GjTilCajFqLJ0eVYzRPaY6f++Gv/UVfAPV4c+S0
+	kAWpXbv5tbkkzbS0eaLPTKgLzavXtQoTtKwrjpolHKIHUz6Wu+n4abfAIRFubOdN
+	/+aLoRQ0yBDRbdXMsZN/jvY44eM+xRLdRVyMmdPtP8belRi2E2aEzA==
+	-----END RSA PRIVATE KEY-----
+
+
+	Since I used putty to get through these exercises i will begin explaining how to convert this into something putty can use for verifying you into bandit14. Save the rsa key (including the begin and end lines that are human readable) and then type in "puttykey" within your taskbar to load up the putty key generator, click load and put in the text file and from there follow the steps to create the new key file. Once you're back into putty, load a new session and in ssh/auth submenu, input your private key. if the conversion went alright then you should be verified into bandit 14 without needing a password! 
+
+	Once logged in, cat or go into the following directory (/etc/bandit_pass/bandit14)  NOTE: bandit14 is the password so if you are going to go directly into the dir then use only etc/bandit_pass. just using cat would be easier in my opinion though
+
+
+	Password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
+
+Level 14-15 (Sending information to a specific IP and port):
+
+	To solve this level I used netcat as i had prior experience using it within a reverse engineering course. Netcat allows you to send messages using tcp/udp and probably other protocols for messsage travel. Anyways make sure you have the previous password saved onto your clipboard and then type in the following command
+
+		nc localhost 30000
+
+	Form there you will get sent to the next line in your terminal, indicating that you are now connected to the specified ip through the specified port. from there paste your password (or type it in if you enjoy the effort) and then press enter. From there, the server will verify that you entered the password correctly and then it will display the new password!
+
+	Password: BfMYroe26WYalil77FoDi9qh59eK5xNr
+
+Level 15-16 (Use ssl to connect to localhost):
+	
+	This level asks that you do basically what the previous level asked but using ssl instead. SSL essentially adds a layer of security and encrypts the infromation, at least according to my minimal understanding of the protocol. Anyways, to connect using ssl load up bandit 15 and then type in the following command
+
+			openssl s_client -connect SERVER_IP:PORT_NUM
+
+	openssl s_client -connect specifies that you would like to connect as a client using openssl and then of course the rest specifies the server and port that you would like to use. Similar to netcat, after typing in the command, if no error occurs you can just type in the password and it will reveal the next one!
+
+
+	Password: cluFn7wTiGryunymYOu4RcffSxQluehd
+
+LEvel 16-17 (Find listening ports that are ssl compatible):
+	
+	To start off, you must first shrink the total possible ports from the 1000 specified by typing in the following command
+
+		nc -zf localhost 31000-32000
+
+	This checks to see which ports are open. From there you should get 2 ports returned, to find which of the ports can recieve ssl connections. I was unsure of how to check if the port was open to ssl connections but since there were 2 of them I simply just tested them both out. The first one responds with an RSA key as seen below, the second simply returns your input.
+
+
+	-----BEGIN RSA PRIVATE KEY-----
+	MIIEogIBAAKCAQEAvmOkuifmMg6HL2YPIOjon6iWfbp7c3jx34YkYWqUH57SUdyJ
+	imZzeyGC0gtZPGujUSxiJSWI/oTqexh+cAMTSMlOJf7+BrJObArnxd9Y7YT2bRPQ
+	Ja6Lzb558YW3FZl87ORiO+rW4LCDCNd2lUvLE/GL2GWyuKN0K5iCd5TbtJzEkQTu
+	DSt2mcNn4rhAL+JFr56o4T6z8WWAW18BR6yGrMq7Q/kALHYW3OekePQAzL0VUYbW
+	JGTi65CxbCnzc/w4+mqQyvmzpWtMAzJTzAzQxNbkR2MBGySxDLrjg0LWN6sK7wNX
+	x0YVztz/zbIkPjfkU1jHS+9EbVNj+D1XFOJuaQIDAQABAoIBABagpxpM1aoLWfvD
+	KHcj10nqcoBc4oE11aFYQwik7xfW+24pRNuDE6SFthOar69jp5RlLwD1NhPx3iBl
+	J9nOM8OJ0VToum43UOS8YxF8WwhXriYGnc1sskbwpXOUDc9uX4+UESzH22P29ovd
+	d8WErY0gPxun8pbJLmxkAtWNhpMvfe0050vk9TL5wqbu9AlbssgTcCXkMQnPw9nC
+	YNN6DDP2lbcBrvgT9YCNL6C+ZKufD52yOQ9qOkwFTEQpjtF4uNtJom+asvlpmS8A
+	vLY9r60wYSvmZhNqBUrj7lyCtXMIu1kkd4w7F77k+DjHoAXyxcUp1DGL51sOmama
+	+TOWWgECgYEA8JtPxP0GRJ+IQkX262jM3dEIkza8ky5moIwUqYdsx0NxHgRRhORT
+	8c8hAuRBb2G82so8vUHk/fur85OEfc9TncnCY2crpoqsghifKLxrLgtT+qDpfZnx
+	SatLdt8GfQ85yA7hnWWJ2MxF3NaeSDm75Lsm+tBbAiyc9P2jGRNtMSkCgYEAypHd
+	HCctNi/FwjulhttFx/rHYKhLidZDFYeiE/v45bN4yFm8x7R/b0iE7KaszX+Exdvt
+	SghaTdcG0Knyw1bpJVyusavPzpaJMjdJ6tcFhVAbAjm7enCIvGCSx+X3l5SiWg0A
+	R57hJglezIiVjv3aGwHwvlZvtszK6zV6oXFAu0ECgYAbjo46T4hyP5tJi93V5HDi
+	Ttiek7xRVxUl+iU7rWkGAXFpMLFteQEsRr7PJ/lemmEY5eTDAFMLy9FL2m9oQWCg
+	R8VdwSk8r9FGLS+9aKcV5PI/WEKlwgXinB3OhYimtiG2Cg5JCqIZFHxD6MjEGOiu
+	L8ktHMPvodBwNsSBULpG0QKBgBAplTfC1HOnWiMGOU3KPwYWt0O6CdTkmJOmL8Ni
+	blh9elyZ9FsGxsgtRBXRsqXuz7wtsQAgLHxbdLq/ZJQ7YfzOKU4ZxEnabvXnvWkU
+	YOdjHdSOoKvDQNWu6ucyLRAWFuISeXw9a/9p7ftpxm0TSgyvmfLF2MIAEwyzRqaM
+	77pBAoGAMmjmIJdjp+Ez8duyn3ieo36yrttF5NSsJLAbxFpdlc1gvtGCWW+9Cq0b
+	dxviW8+TFVEBl1O4f7HVm6EpTscdDxU+bCXWkfjuRb7Dy9GOtt9JPsX8MBTakzh3
+	vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
+	-----END RSA PRIVATE KEY-----
+
+Level 17-18 (Find the changed line within 2 files):
+
+	This question simply asks that you use the diff command to find the changed line in 2 nearly identical files. To do this type in the following command
+
+		diff passwords.old passwords.new
+
+	From there, the first password will be the one that leads you into the next step. As a sidenote, from my understanding the first line displayed is the line from the first input that differed and the second is the line from the second that differed.
+
+	Password: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
