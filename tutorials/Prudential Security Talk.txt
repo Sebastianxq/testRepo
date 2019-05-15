@@ -1,0 +1,94 @@
+Pruedential Security Talk
+
+SAST - Static Analysis Security Test
+MAST - Mobile Analysis Security Test
+DAST - Dynamic Analysis Security Test
+
+Often times developers are focused on the functionality of the program rather than the security of it
+	-Make a button, no big deal
+	-Get some info, alright
+
+Open Source scanning
+	-Could have backdoors
+	-Phoning back to home 
+	-Requires big companies to be careful when using open source software
+
+Locard's principal
+	-Everything action leads a trace
+
+Clickjackign Defenses
+	Defending against clickjacking with "X-Frame-Options" response header
+		-Says dont let anyone frame the content inside that frame only inside a specific domain
+		-Otherwise specify the domains that you allow or even deny from other places
+
+	Content Security Policy Implementation
+		-Header has to go across certain
+		-Only allows things from pruedential or whatever
+
+Cross Site Scripting
+	-Input form validation error
+
+Fixing Cross Site Scripting
+	-Consider all user provided input as unsafe
+	-Encode all dynamic data returned to the user
+	-OWASP Enterprise Security API (FREE!!!)
+
+
+Active Defense -Key Security Principles
+	1.)Build Defence in Depth
+		???
+	2.)Secure Failure
+		dont give info on a failure
+	3.)Least Privilege and need to know
+		restrict rwx access on a need to know basis
+	4.)Compartmentalize
+		only giver certain options the information that they need to use
+	5.)Simplicity by design
+		keep it simple dont make it complicated to the point where you need a dozen guys to read it
+	6.)Secure the weakest link
+		Usually it's PEOPLE! 
+		Do user awareness programs
+	7.)Privacy
+	8.)Be smart about hiding secrets
+		Not changing your password to something completely unique
+	9.)Reluctance to trust
+		Skeptical on who you give informaiton to
+	10.)Use proven technologies
+		Higher level of trust with applications you pay for due to the inherent nature of proprietary
+		Github/OpenSource may have 0 day vulnerabilities
+
+Active Defense
+	-Technology acceptance model, a behavioral model that predicts what people will do
+		-Caldwell, Modeling user behaviour in response to cyberthreats
+	-3 hypothesized direct effects
+		-Attitude to intention, perceotions of peer group to intention and preceived ability to prevent threat to behavior
+	-Percieved ability to prevent threats has no significant effect upon intentions.
+	-An average user is not aware of the scale and ease with which a virus can be transmitted or the potential damage that a virus can do
+	-Dr.Caldwell predicts that this is due to the fact that a virus is not tangible, thus increasing the risks that people get caught in them
+
+Security positions are currently lacking within the industry
+
+Active Defense education
+	ARL and UTEP have developed tools and next gen cybersec research to expand it's overall capabilities to attract and retain talent in the workforce
+
+
+An interesting Research topic would be does previous exposure to viruses help in defense?
+	Im thinking it might help for a certain time but then gradually drops down due to a fading threat level
+
+Active Defense - Adapting Mehtodologies
+	Shift left in security principles which means that testing earlier in the software development process is a key point in having testing as close as possible to developers to reduce cost. this includes SAST.
+
+SAST
+	-Enables defect prevention and defect detections
+	-High profile security flaws like injections XSS and buffer overflows
+	-Best fix deployment optimizes development lead time
+
+DAST
+	-Analysis of the security profile of in line and runtime applications
+	Introduces automate scanning capabilities at runtime
+	Uncover directory/path traversal, forced browsing, authentication weaknesses and configuration issues.
+
+Active Defense - DevSecOps
+	-Continous Delivery and integration (CICD)
+		-Small design in code changes that are constantly upgrading. Iterative Development
+	Agile Development
