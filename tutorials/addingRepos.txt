@@ -1,0 +1,9 @@
+This short tutorial helps users figure out how to add additional repositories into their package manager for Kali or any debian based OS
+that utilizes "apt-get".
+
+1.)Go to /etc/apt
+2.)enter: "nano sources.list" into the terminal
+3.)Go to a web browser and type in "docs.kali.org/general-use/kali-linux-sources-list-repositories"
+4.)Copy repos to your sources.list file and save it
+5.)Go back to the terminal and type "apt-get update" 
+6.)Once the command finishes, type "apt-get upgrade"
