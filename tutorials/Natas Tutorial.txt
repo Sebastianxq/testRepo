@@ -1,22 +1,70 @@
 Natas Tutorial
 
-Level0 (Find password on page):
+Level 0 (Find password on page):
 
-To find the password on this page, you just need to inspect the page source. In the html, written in a comment, will be the password to the next level
+To find the password on this page, you just need to inspect the page source. In the html, written in a comment, will be the password to the next level.
 
 Password:gtVrDuiDfck831PqWsLEZy5gyDz1clto 
 
-Level1(Find password on page but right clicking is blocked!):
+Level 1 (Find password on page but right clicking is blocked!):
 
-1.) Use Developer Tools and then expand the html to find the password
+1.)Use Developer Tools and then expand the html to find the password.
 2.)Save the webpage and then open it in a text editor to view the source!
 
 Password: ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi
 
-
 Level 2 (Nothing on the page)
 
-For this one we will have to use our detective skills to find the password. Inspecting the page reveals a few scripts for jquery, css and some other noise. The interesting part here is the picture that is embedded into the website. This picture is a 1x1 pixel but holds the answer to the solution for this level. Copy the url to the picture but TAKE OUT the last part of the extension, leaving it only at http://natas2.natas.labs.overthewire.org/files/. From there you can see there is a text file on the index. Click it and there's the file for the next page!
-
+For this one we will have to use our detective skills to find the password. Inspecting the page reveals a few scripts for jquery, css and some other noise. The interesting part here is the picture that is embedded into the website. This picture is a 1x1 pixel but holds the answer to the solution for this level. Copy the url to the picture but TAKE OUT the last part of the extension, leaving it only at "http://natas2.natas.labs.overthewire.org/files/" From there you can see there is a text file on the index. Click it and there's the file for the next page!
 
 Password: sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+
+Level 3 (Also nothing on the page)
+
+On this one, I originally saw that there was a hidden input field, which i figured could be manipulated to output something else, especially with the "igotitnow" field. Unfortunately that was not the case and what you really need to focus on is the comment in the html that states "not even google can find this". As one would expect from the implications of this message, to find the password to the next level you need to understand the basic level of how google indexes websites. each website on google has a "robots.txt" which is used by google's "webcrawler" to index websites and get information about a particular website. So you basically change the URL to be the one below 
+
+	http://natas3.natas.labs.overthewire.org/robots.txt
+
+From there you will see a directory called /s3cr3t/ on the page, change the url once again to this and then click the user directory and the password will be right there! Sidenote: I am extremely upset that i spent legitimately about an hour trying to figure out how I would be able to manipulate that hidden input field but you win some you lose some in the game of life.
+
+http://natas3.natas.labs.overthewire.org/s3cr3t/
+
+natas4: Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+Level 4 (need to be on page 5 to access)
+
+This one asks that you need to be coming from the next level (level 5) in order to access the password. Initially it might seem impossible but the trick is that it only asks you to come from the next page, not that the next page verified your credentials. Copy the refresh html code and change the link to the one below, or create your own html link that will send you back to page 4. 
+
+	<a href="http://natas4.natas.labs.overthewire.org/index.php">Refresh page</a>
+
+From there, change the url to be from level 5 and ensure that it does not have index.php at the end. Edit the page source to include the link back to 4 and then click the link and then the password will pop up on screen!
+
+Password: iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq 
+
+Level 5(You are not authorized or something like that)
+
+To get the password for this level you must change a cookie within the website. Scanning the html wont do you any good nor will trying to manipulate anything within it or naviating other pages within the domain. I used the "Edit This Cookie" extension after looking it up although you can manipulate cookies from the in-browser Web Console as well! Once you gain access to the cookies: go to the login verification cookie and change the setting from 0 to 1 and presto! upon refreshing the page the password will show up!
+
+	Password: aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1
+
+Level 6 (Secret input)
+
+View the source info that is provide, you will see that the input compares to a secret associative array. Take the include that is found in the source code and append it to the end of the current level's url and there you will recieve the input for the password! Type in that input and the password will reveal itself to be
+
+  Password:7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+Level 7 (password is in a directory)
+
+	On this page you will see that there are 2 links, after clicking each of the links the page at the top will change to page=____
+	In the html comments there's a url extension that you need to copy and then go back to the url and change the extension to page=*commentFoundOnPage*. From there, the password will be found to be:
+
+	Password: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+
+Level 8 (Do some light coding)
+	The password for this one was lightly obfuscated in easily reversible methods, the "hash" is given to you and you simply neeed to crack it. to do this you must both reverse the order and, depending on the function used, reverse the function. For example, the base64 and bin2Hex methods need to be reversed since they are encodings but the strrev method does NOt need to be reversed since it is a encryption method. Anyways im rambling, just type in the code below to either the page or to anything that supports php and then print it out to your console. from there you should get the unhashed input which you can then type in to get the password.
+
+$strFinal = base64_decode(strrev(hex2Bin($str)));
+
+Natas8 password = W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+
+Natas 9 ()
