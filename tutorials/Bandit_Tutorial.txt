@@ -1,14 +1,33 @@
-Over The Wire Tutorials/?s
+Bandit Tutorials. 
 
-1.)How does overthewire know which port the connection is coming from? Do computers store the specific port number when making a request? And if so, what is the purpose of spending that extra bit of information within a request.
+********NOTE********
+
+I GREATLY ADVISE YOU TO ATTEMPT TO GO THROUGH THE LEVELS ON YOUR OWN BECAUSE THE STUFF YOU LEARN HERE IS ACTUALLY PRETTY HELPFUL FOR LATER ON IF YOU PLAN ON GOING INTO CYBERSEC OR JUST ANYTHING THAT REQUIRES SOME CLI KNOWLEDGE
+
+THIS TUTORIAL IS INCOMPLETE AS OF YET AND WILL BE UPDATED SEMI-INFREQUENTLY THROUGHOUT THE REST OF 2019.
+
+If you have any questions, comments or ideas for improving this guide please feel free to send me an email at Sxquinones@miners.utep.edu
+
+******************** 
 
 
-Over the wire tutorials
 Level 0 (connect to SSH): 
-	For level 0 you simply need to type in the command ssh bandit0@overthewire.org or whatever into a terminal that supports ssh. I ended up sing puTTY since the pawnshop i used to work at relied on that program for it's entire database but cygwin or something similar is fine.
+	For level 0 you simply need to type in the following command into a terminal that supports ssh.
+
+	ssh bandit.labs.overthewire.org -p 2220
+
+	For general compatibility, I would recommend using linux or some kind of terminal emulator like Cygwin or even PuTTy. I ended up using PuTTY since a company I used to work at utilized that program.
 
 Level 0-1 (Open a simple 1 string filename):
-	Using the same host as the previous level (puTTy allows you to save the port and website for later terminals which is a bonus) first have 2 termianls/ windows ready. in the first one go back to bandit0 but this time use bash commands (ls) to find the readme file located within it. Once this file is found, perform further bash commands (cat) to get the contents and then use the contents of that read me file for the password for bandit1. 
+	Once you're logged into the host, you can get the password to proceed into the next level. While connected to the ssh terminal, use the following command to list everything within the directory
+	
+	ls
+
+	You will then see a file called "readme", to actually read this file, type in the following:
+
+	cat readme
+
+	The password will be displayed and you will be on your way to becoming a bash guru!
 
 	Password: boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 
@@ -17,20 +36,40 @@ Level 1-2 (Opens files that are only dashes):
 
 	Password: CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
-	You can also use ls -a in theory to get the file in question
+	You can also use ls -a to get the file in question
 
 Level 2-3 (Open a filename with spaces within it):
-	To open the file you just need to put the title in parenthesis, so execute the command "cat 'spaces in the filename'".
+	To open the file, you just need to put the title in parenthesis, so execute the following command:
+
+	"cat 'spaces in the filename'".
 
 	Password: UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
 Level 3-4 (find hidden files within a directory):
-	To find the hidden file within the "inhere" directory, first switch to that directory with "cd inhere" and then proceed to type in "find". Once find is executed an updated listing should be available with the file "./.hidden" within it/ cat that file and the password will then be discovered
+	To find the hidden file within the "inhere" directory, first switch to that directory with the command below:
+
+	cd inhere
+
+	proceed to type in the command:
+
+	find
+
+	Once find is executed an updated listing should be available with the file "./.hidden" within it. cat that file and the password will then be discovered
 
 	Password:pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 
 Level 04-05 (find the password within a handful of passwords named -fileXX):
-	since cat -file00 is not possible, use find to then list the files within the format found above "./.file-name" and then execute it from there. I ended up going through each file individually but im sure there is a method out there that can be doen with one command, perhaps creating a shell command that iterates from 00 to 09? Anyways:
+	since cat -file00 is not possible, use find to then list the files within the format found above "./.file-name" and then execute it from there. I ended up going through each file individually but I’m sure there is a method out there that can be done with one command, perhaps creating a shell command that iterates from 00 to 09? Anyways: 
+
+	This level has different directory permissions once you enter "inhere" making cat useless WITHIN the directory. to circumvent this, we can go outside of it and cat the files using the following:
+
+	cat inhere/file-XX
+
+	This however makes it so that you need to go through eahc command file by file to find the password. A better way to go through all of them at once is to type in the command below!
+
+	cat inhere/-file* | strings
+
+	This improved command will print out all the contents of ALL the files and THEN remove all the noise from them, leaving only the 'strings' that are human readable (well in the sense that we can use them anyways lol).
 
 	Password: koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 
@@ -45,23 +84,23 @@ level 05-06 (Find a file of a specific size within about a dozen directories):
 
 	 Password:DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 
-Level 06-07 (find a file that is owned by a specific user and owned by a specific group that is NOT in the starting dir):
-	To start off you can view file permissions using "ls -la" this will display the file in a -rwxrwxrwx format, the format is explained below
+Level 06-07 (find a file that is owned by a specific user and owned by a specific group that is NOT in the starting dir.):
+	To start off you can view file permissions using "ls -la" this will display the file along with the permissions, which are listed in a -rwxrwxrwx format, the format is explained below:
 
 	-/d: states if the slot is a file or a directory
 	1st rwx: permissions for the owner of the file
 	2nd rwx: permissions for the group owners of the file
 	3rd rwx: permissions for everyone else
 
-	When initially loggin into bandit 6, there is nothing in the directory so you need to move up 1 more directory. You can do this by typing in the following command
+	When initially logging into bandit 6, there is nothing in the directory, so you need to move up 1 more directory. You can do this by typing in the following command
 
 	cd ..
 
-	In the next directory you can type in the command find -size33c -user bandit7 -group bandit6 but there is no file within the directory that matches the criteria (you will also recieve a few permisisons denied due to some directories being locked out from your user) type in the same command you used to move up 1 more directory and then type in the search command to once again search for a file that matches the given criteria. It is here you will find the file ./bandit7.password, with that file you can view the password by typing in the following
+	In the next directory you can type in the command find -size33c -user bandit7 -group bandit6 but there is no file within the directory that matches the criteria (you will also receive a few permissions denied due to some directories being locked out from your user) type in the same command you used to move up 1 more directory and then type in the search command to once again search for a file that matches the given criteria. It is here you will find the file ./bandit7.password, with that file you can view the password by typing in the following
 
 	 cat "./bandit7.password"
 
-	 This will give the password found below
+	 This will give the password found below:
 
 	Password: HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 
@@ -78,7 +117,7 @@ Level 08-09(Find the password on a line that only occurs once within the text fi
 
 	sort data.txt | uniq -u
 
-	Sort does exactly what it says and sorts the file in alphabetical order
+	Sort does exactly what it says and sorts the file contents in alphabetical order
 	uniq -u removes all instances of repetitions. 
 	The pipe is used to give uniq -u an input, since it relies on repetitions to be next to each other to remove them
 
@@ -86,9 +125,15 @@ Level 08-09(Find the password on a line that only occurs once within the text fi
 
 Level 09-10 (Find a password next to = signs where most of the text is not human readable): NEEDS IMPORVEMENT
 
-	To cheese this one you can easily type the following command and then look through the few lines to find it
+	To cheese this one, you can easily type the following command and then look through the few lines to find it
 
 	sort data.txt
+
+	Otherwise you can do it correctly and type in the command below:
+
+	strings data.txt | grep "="
+
+	Strings is used to remove all the non-human-readable data and grep is used to filter out anything that doesnt have the equal sign in it!
 
 	password: truKLdjsbJ5g7yyJ2X2R0o3a5HQJFuLk
 
@@ -100,7 +145,7 @@ Level 10-11 (Covert base64 to human readable):
 	 Password: IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 
 Level 11-12 (Rot13 encoding of a text file):
-	The only commands you need for this one are cat and tr. Cat so that you can pipe the file into stdout and tr which is used to fix the rotation. since both capitals and lowercase have been shifted you must that that into account when doing the command which is as follows
+	The only commands you need for this one is cat and tr. Cat so that you can pipe the file into stdout and tr which is used to fix the rotation. since both capitals and lowercase have been shifted you must that that into account when doing the command which is as follows
 
 	cat data.txt | tr '[a-zA-Z]' '[n-za-mN-ZA-M]'
 
@@ -108,8 +153,8 @@ Level 11-12 (Rot13 encoding of a text file):
 	Password:5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 
 Level 12-13(Hex dump of a compressed file):
-	
-	This level asks that you revert some work done to obfuscate the password. since you need write permissions overTheWire allows you to create directories within the tmp directory. to create one and move the data file to saiddirectory, do the following commands
+	This level asks that you revert some work done to obfuscate the password. since you need write permissions overTheWire allows you to create directories within the tmp directory. to create one and move the data file to said directory, do the following commands
+
 		mkdir /tmp/NAME (to make dir)
 		cp data.txt /tmp/NAME
 
@@ -125,15 +170,15 @@ Level 12-13(Hex dump of a compressed file):
 
 		file FILE_NAME
 
-	each time you compress do the same method and then after maybe 10 or so iterations you will get a ASCII text file containing the password to the next part. I should also note that since you are allowed to make files within this directory it is likely plausible that you can create a .sh file that automatically decompresses the files until you get to the uncompressed password version. I have yet to implement it but I believe that you can likely use file to figure out which extension it is and then based on the outcome decompress using a specific library.
+	each time you compress do the same method and then after maybe 10 or so iterations you will get an ASCII text file containing the password to the next part. I should also note that since you are allowed to make files within this directory it is likely plausible that you can create a .sh file that automatically decompresses the files until you get to the uncompressed password version. I have yet to implement it but I believe that you can likely use file to figure out which extension it is and then based on the outcome decompress using a specific library.
 	
 
 	password: 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 
-	It is also worth nothing that you can cheese this one by randomly entering someone elses tmp directory, although that would be immoral amirite?
+	It is also worth noting that you can cheese this one by randomly entering someone else’s tmp directory, although that would be cheating
 
 Level 13-14 (Using a private RSA key to login):
-	RSA is a type of encryption that which at is used for obviously security reasons. upon first glance the key supplied is long enough to be unbreakable by current means (meaning you can't brute force it or guess it in your lifetime). The first thing you should do is get the key, which is below
+	RSA is a type of encryption that is used for obviously security reasons. The key supplied is long enough so that you would never be able to guess it, unless you're infinite monkeys using a typewriter. Anyways, The first thing you should do is get the key, which is below
 
 	-----BEGIN RSA PRIVATE KEY-----
 	MIIEpAIBAAKCAQEAxkkOE83W2cOT7IWhFc9aPaaQmQDdgzuXCv+ppZHa++buSkN+
@@ -168,12 +213,16 @@ Level 13-14 (Using a private RSA key to login):
 
 	Once logged in, cat or go into the following directory (/etc/bandit_pass/bandit14)  NOTE: bandit14 is the password so if you are going to go directly into the dir then use only etc/bandit_pass. just using cat would be easier in my opinion though
 
+	If you are not using putty, use the command below to learn how to use an RSA key on a terminal
+
+	man ssh
+
 
 	Password: 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
 
 Level 14-15 (Sending information to a specific IP and port):
 
-	To solve this level I used netcat as i had prior experience using it within a reverse engineering course. Netcat allows you to send messages using tcp/udp and probably other protocols for messsage travel. Anyways make sure you have the previous password saved onto your clipboard and then type in the following command
+	To solve this level, I used netcat as i had prior experience using it within a reverse engineering course. Netcat allows you to send messages using tcp/udp and probably other protocols for message travel. Make sure you have the previous password saved onto your clipboard and then type in the following command
 
 		nc localhost 30000
 
@@ -183,22 +232,22 @@ Level 14-15 (Sending information to a specific IP and port):
 
 Level 15-16 (Use ssl to connect to localhost):
 	
-	This level asks that you do basically what the previous level asked but using ssl instead. SSL essentially adds a layer of security and encrypts the infromation, at least according to my minimal understanding of the protocol. Anyways, to connect using ssl load up bandit 15 and then type in the following command
+	This level asks that you do basically what the previous level asked but using ssl instead. SSL essentially adds a layer of security and encrypts the information, at least according to my minimal understanding of the protocol. Anyways, to connect using ssl load up bandit 15 and then type in the following command
 
-			openssl s_client -connect SERVER_IP:PORT_NUM
+			Openssl s_client -connect SERVER_IP:PORT_NUM
 
-	openssl s_client -connect specifies that you would like to connect as a client using openssl and then of course the rest specifies the server and port that you would like to use. Similar to netcat, after typing in the command, if no error occurs you can just type in the password and it will reveal the next one!
+	Openssl s_client -connect specifies that you would like to connect as a client using Openssl and then of course the rest specifies the server and port that you would like to use. Similar to netcat, after typing in the command, if no error occurs you can just type in the password and it will reveal the next one!
 
 
 	Password: cluFn7wTiGryunymYOu4RcffSxQluehd
 
-LEvel 16-17 (Find listening ports that are ssl compatible):
+Level 16-17 (Find listening ports that are ssl compatible):
 	
 	To start off, you must first shrink the total possible ports from the 1000 specified by typing in the following command
 
 		nc -zf localhost 31000-32000
 
-	This checks to see which ports are open. From there you should get 2 ports returned, to find which of the ports can recieve ssl connections. I was unsure of how to check if the port was open to ssl connections but since there were 2 of them I simply just tested them both out. The first one responds with an RSA key as seen below, the second simply returns your input.
+	This checks to see which ports are open. From there you should get 2 ports returned, to find which of the ports can receive ssl connections. I was unsure of how to check if the port was open to ssl connections but since there were 2 of them I simply just tested them both out. The first one responds with an RSA key as seen below, the second simply returns your input.
 
 
 	-----BEGIN RSA PRIVATE KEY-----
@@ -238,3 +287,27 @@ Level 17-18 (Find the changed line within 2 files):
 	From there, the first password will be the one that leads you into the next step. As a sidenote, from my understanding the first line displayed is the line from the first input that differed and the second is the line from the second that differed.
 
 	Password: kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd
+Level 18-19 (Print out the contents of a README with auto logout)
+
+	To overcome this challenge, you must first figure out how to send a shell command WITH your ssh connection request. Putty makes this impossible (probably) so I opted to load up a virtual machine with Kali since it already had all *nix commands that I’m used to and has ssh installed automatically. Once you load it up, type in the following command.
+ 
+	ssh -t bandit18@bandit.labs.overthewire.org -p 2220 'grep "" *; bash -l' 
+
+	This command will send a request to connect via ssh but ALSO grep all the files in the directory. Once you execute this command you will still be prompted to login but upon doing so, will get the password for the next level.
+
+	PASSWORD: IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
+
+Level 19-20 (use a setuid bin to change privileges)
+
+	Nothing too crazy on this one. You first need to get some information regarding how the file can be used, to do this run it with the command below
+
+	./bandit20-do
+
+	This will give you the syntax. From there, as you can guess the file allows you to change privileges to bandit20 which will in turn allow you to read the password for the next level. Type in the command below and the password will be yours!
+
+	./bandit20-do cat /etc/bandit_pass/bandit20
+
+	Password: GbKksEFF4yrVs6il55v6gwY5aVje5f0j
+
+
+Level 20-21 ()
