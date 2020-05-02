@@ -1,10 +1,10 @@
 chan message=[0] of {bit}; //update
 
 //had bit i and message!i
-active proctype FS(bit i)
+active proctype FS()
 
 { do ::  
-		message!i;
+		message!0;
 		printf("FS put msg\n")
 		if :: message?1; //looks for msg_complete
 			printf("FS found msg_complete\n");
@@ -31,8 +31,4 @@ active proctype TA()
 	od
 }
 
-active proctype outsideProgram()
-{
-	printf("outside msg incoming\n");
-}
 
