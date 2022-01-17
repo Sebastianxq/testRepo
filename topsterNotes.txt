@@ -1,0 +1,9 @@
+Quick blurbs about the functionality of topster2 that i've noticed. 
+Barring any legal issues that may exist: i'd like to one day make a clone of the website due to a difference in opinion (read: I think the guy is a nutjob and want to end his reign in the mucore scene)
+
+
+1.)Multiple renders for your topster can be made at once. (this did result in a bug where the rendering load button continued for png)
+2.)exports are done in JSON, everything is encoded into some form of string that then gets decoded by the system.
+3.)The search engine either uses a modified search query to weed out the non-relevant searches, is built from the ground up to scrape only music images or is reading from some 
+  DB that only stores music stuff (Further testing needs to be done to see how this fares against more obscure albums that wouldn't be found in traditional streaming platforms
+4.)There's an option for movies too (untested). 
